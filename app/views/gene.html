@@ -69,7 +69,7 @@
         <span ng-show="!reviewMode">
             <comments-dict key="'summary'" path="getObservePath({type: 'gene'})"></comments-dict>
             <refresh-date ng-if="gene.summary_validateTime" key="'summary'" hugo-symbol="gene.name" obj="gene" update-time="gene.summary_validateTime.updateTime"
-                          updated-by="gene.summary_validateTime.updatedBy" disabled="disableRefreshDate(gene.summary_review)"></refresh-date>
+                          updated-by="gene.summary_validateTime.updatedBy" disabled="disableRefreshDate(gene.summary_uuid)" path="getObservePath({type: 'gene'})" location="'Gene Summary'"></refresh-date>
         </span>
         <review-panel hugo-symbol="gene.name" evidence-type="'GENE_SUMMARY'" obj="gene" key="'summary'" get-evidence="getEvidence(type)" model-update="modelUpdate(type)"
         uuid="getUUID({type: 'gene', key: 'summary'})" review-obj="gene.summary_review"></review-panel>
@@ -82,11 +82,11 @@
         </h3>
         <div ng-class="getGeneTypeClass(reviewMode, 'tsg')">
             <realtime-string key="'tsg'" path="getObservePath({type: 'geneType'})" review-obj="gene.type_review" uuid="::gene.type.tsg_uuid" fe="geneEditable" t="'checkbox'" object="gene.type" objecttype="'object'" objectkey="'tsg'" checkboxes="checkboxes['TSG']" checkboxid="'TSG'"></realtime-string>
-            <refresh-date ng-if="gene.type.tsg_validateTime" ng-show="!reviewMode" key="'tsg'" hugo-symbol="gene.name" obj="gene.type" update-time="gene.type.tsg_validateTime.updateTime" updated-by="gene.type.tsg_validateTime.updatedBy" disabled="disableRefreshDate(gene.type.tsg_review)"></refresh-date>
+            <refresh-date ng-if="gene.type.tsg_validateTime" ng-show="!reviewMode" key="'tsg'" hugo-symbol="gene.name" obj="gene.type" update-time="gene.type.tsg_validateTime.updateTime" updated-by="gene.type.tsg_validateTime.updatedBy" disabled="disableRefreshDate(gene.type.tsg_uuid)" path="getObservePath({type: 'geneType'})" location="'Gene Type'"></refresh-date>
         </div>
         <div ng-class="getGeneTypeClass(reviewMode, 'ocg')">
             <realtime-string key="'ocg'" path="getObservePath({type: 'geneType'})" review-obj="gene.type_review" uuid="::gene.type.ocg_uuid" fe="geneEditable" t="'checkbox'" object="gene.type" objecttype="'object'" objectkey="'ocg'" checkboxes="checkboxes['OCG']" checkboxid="'OCG'"></realtime-string>
-            <refresh-date ng-if="gene.type.ocg_validateTime" ng-show="!reviewMode" key="'ocg'" hugo-symbol="gene.name" obj="gene.type" update-time="gene.type.ocg_validateTime.updateTime" updated-by="gene.type.ocg_validateTime.updatedBy" disabled="disableRefreshDate(gene.type.ocg_review)"></refresh-date>
+            <refresh-date ng-if="gene.type.ocg_validateTime" ng-show="!reviewMode" key="'ocg'" hugo-symbol="gene.name" obj="gene.type" update-time="gene.type.ocg_validateTime.updateTime" updated-by="gene.type.ocg_validateTime.updatedBy" disabled="disableRefreshDate(gene.type.ocg_uuid)" path="getObservePath({type: 'geneType'})" location="'Gene Type'"></refresh-date>
         </div>
       </div>
     <div ng-if="displayPrecisely(gene.background_uuid)">
@@ -96,7 +96,7 @@
         <span ng-show="!reviewMode">
             <comments-dict key="'background'" path="getObservePath({type: 'gene'})"></comments-dict>
             <refresh-date ng-if="gene.background_validateTime" key="'background'" hugo-symbol="gene.name" obj="gene" update-time="gene.background_validateTime.updateTime"
-                          updated-by="gene.background_validateTime.updatedBy" disabled="disableRefreshDate(gene.background_review)"></refresh-date>
+                          updated-by="gene.background_validateTime.updatedBy" disabled="disableRefreshDate(gene.background_uuid)" path="getObservePath({type: 'gene'})" location="'Gene Background'"></refresh-date>
         </span>
         <review-panel hugo-symbol="gene.name" uuid="gene.background_uuid" review-obj="gene.background_review" evidence-type="'GENE_BACKGROUND'" obj="gene"
           key="'background'" get-evidence="getEvidence(type)" model-update="modelUpdate(type)"></review-panel>
@@ -165,18 +165,18 @@
               <p ng-show="displayPrecisely(mutation.mutation_effect.oncogenic_uuid)">
                 <strong style="float: left; margin-right: 5px;">Oncogenic:</strong>
                   <refresh-date ng-if="mutation.mutation_effect.oncogenic_validateTime" ng-show="!reviewMode" key="'oncogenic'"
-                                update-time="mutation.mutation_effect.oncogenic_validateTime.updateTime"
-                                updated-by="mutation.mutation_effect.oncogenic_validateTime.updatedBy"
-                                hugo-symbol="gene.name" obj="mutation.mutation_effect" disabled="disableRefreshDate(mutation.mutation_effect.oncogenic_review)"></refresh-date>
+                                update-time="mutation.mutation_effect.oncogenic_validateTime.updateTime" location="getLocation('Mutation Effect', mutation.name)"
+                                updated-by="mutation.mutation_effect.oncogenic_validateTime.updatedBy" path="effectPath"
+                                hugo-symbol="gene.name" obj="mutation.mutation_effect" disabled="disableRefreshDate(mutation.mutation_effect.oncogenic_uuid)"></refresh-date>
                   <br />
                 <realtime-string t="'checkbox'" key="'oncogenic'" path="effectPath" checkboxes="checkboxes['oncogenic']" uuid="getUUID({type: 'mutation_effect', key: 'oncogenic', path: path})"></realtime-string>
               </p>
               <div class="mutationEffect" ng-show="displayPrecisely(mutation.mutation_effect.effect_uuid)">
                 <strong class="header">Mutation effect:</strong>
                 <refresh-date ng-if="mutation.mutation_effect.effect_validateTime" ng-show="!reviewMode" key="'effect'"
-                              update-time="mutation.mutation_effect.effect_validateTime.updateTime"
-                              updated-by="mutation.mutation_effect.effect_validateTime.updatedBy"
-                              hugo-symbol="gene.name" obj="mutation.mutation_effect" disabled="disableRefreshDate(mutation.mutation_effect.effect_review)"></refresh-date>
+                              update-time="mutation.mutation_effect.effect_validateTime.updateTime" location="getLocation('Mutation Effect', mutation.name)"
+                              updated-by="mutation.mutation_effect.effect_validateTime.updatedBy" path="effectPath"
+                              hugo-symbol="gene.name" obj="mutation.mutation_effect" disabled="disableRefreshDate(mutation.mutation_effect.effect_uuid)"></refresh-date>
                 <br />
                 <div>
                   <realtime-string t="'checkbox'" key="'effect'" path="effectPath" checkboxes="checkboxes['mutationEffect']" uuid="getUUID({type: 'mutation_effect', key: 'effect', path: path})"></realtime-string>
@@ -186,9 +186,9 @@
               <span ng-show="displayPrecisely(mutation.mutation_effect.description_uuid)">
                 <strong>Description of Evidence:</strong>
                   <refresh-date ng-if="mutation.mutation_effect.description_validateTime" ng-show="!reviewMode" key="'description'"
-                                update-time="mutation.mutation_effect.description_validateTime.updateTime"
-                                updated-by="mutation.mutation_effect.description_validateTime.updatedBy"
-                                hugo-symbol="gene.name" obj="mutation.mutation_effect" disabled="disableRefreshDate(mutation.mutation_effect.description_review)"></refresh-date>
+                                update-time="mutation.mutation_effect.description_validateTime.updateTime" location="getLocation('Mutation Effect', mutation.name)"
+                                updated-by="mutation.mutation_effect.description_validateTime.updatedBy" path="effectPath"
+                                hugo-symbol="gene.name" obj="mutation.mutation_effect" disabled="disableRefreshDate(mutation.mutation_effect.description_uuid)"></refresh-date>
                 <br/>
                 <realtime-string t="'p'" key="'description'" path="effectPath" uuid="getUUID({type: 'mutation_effect', key: 'description', path: path})"></realtime-string>
               </span>
@@ -239,9 +239,9 @@
                   <div class="flex-column" ng-show="displayPrecisely(tumor.summary_uuid)">
                     <h5><b>Therapeutic Summary (Optional): </b>
                         <refresh-date ng-if="tumor.summary_validateTime" ng-show="!reviewMode" key="'summary'"
-                                      update-time="tumor.summary_validateTime.updateTime"
-                                      updated-by="tumor.summary_validateTime.updatedBy"
-                                      hugo-symbol="gene.name" obj="tumor" disabled="disableRefreshDate(tumor.summary_review)"></refresh-date>
+                                      update-time="tumor.summary_validateTime.updateTime" location="getLocation('Tumor Type Summary', mutation.name, tumor.cancerTypes)"
+                                      updated-by="tumor.summary_validateTime.updatedBy" path="path"
+                                      hugo-symbol="gene.name" obj="tumor" disabled="disableRefreshDate(tumor.summary_uuid)"></refresh-date>
                         <review-panel hugo-symbol="gene.name" uuid="tumor.summary_uuid" review-obj="tumor.summary_review" evidence-type="'TUMOR_TYPE_SUMMARY'" mutation="mutation" tumor="tumor" get-evidence="getEvidence(type, mutation, tumor)" model-update="modelUpdate(type, mutation, tumor)" get-refs="getRefs(mutation, tumor)"></review-panel>
                     </h5>
                     <realtime-string t="'p'" key="'summary'" path="path" uuid="getUUID({type: 'tumor', key: 'summary', path: path})" mutation="mutation" tumor="tumor" indicate-mutation-content="indicateMutationContent(mutation)" indicate-tumor-content="indicateTumorContent(tumor)"></realtime-string>
@@ -249,9 +249,9 @@
                   <div class="flex-column" ng-show="displayPrecisely(tumor.diagnosticSummary_uuid)">
                       <h5><b>Diagnostic Summary (Optional): </b>
                           <refresh-date ng-if="tumor.diagnosticSummary_validateTime" ng-show="!reviewMode" key="'diagnosticSummary'"
-                                        update-time="tumor.diagnosticSummary_validateTime.updateTime"
-                                        updated-by="tumor.diagnosticSummary_validateTime.updatedBy"
-                                        hugo-symbol="gene.name" obj="tumor" disabled="disableRefreshDate(tumor.diagnosticSummary_review)"></refresh-date>
+                                        update-time="tumor.diagnosticSummary_validateTime.updateTime" location="getLocation('Diagnostic Summary', mutation.name, tumor.cancerTypes)"
+                                        updated-by="tumor.diagnosticSummary_validateTime.updatedBy" path="path"
+                                        hugo-symbol="gene.name" obj="tumor" disabled="disableRefreshDate(tumor.diagnosticSummary_uuid)"></refresh-date>
                           <review-panel hugo-symbol="gene.name" uuid="tumor.diagnosticSummary_uuid" review-obj="tumor.diagnosticSummary_review" evidence-type="'DIAGNOSTIC_SUMMARY'" mutation="mutation" tumor="tumor" get-evidence="getEvidence(type, mutation, tumor)" model-update="modelUpdate(type, mutation, tumor)" get-refs="getRefs(mutation, tumor)"></review-panel>
                       </h5>
                       <realtime-string t="'p'" key="'diagnosticSummary'" path="path" uuid="getUUID({type: 'tumor', key: 'diagnosticSummary', path: path})" mutation="mutation" tumor="tumor" indicate-mutation-content="indicateMutationContent(mutation)" indicate-tumor-content="indicateTumorContent(tumor)"></realtime-string>
@@ -259,9 +259,9 @@
                   <div class="flex-column" ng-show="displayPrecisely(tumor.prognosticSummary_uuid)">
                       <h5><b>Prognostic Summary (Optional): </b>
                           <refresh-date ng-if="tumor.prognosticSummary_validateTime" ng-show="!reviewMode" key="'prognosticSummary'"
-                                        update-time="tumor.prognosticSummary_validateTime.updateTime"
-                                        updated-by="tumor.prognosticSummary_validateTime.updatedBy"
-                                        hugo-symbol="gene.name" obj="tumor" disabled="disableRefreshDate(tumor.prognosticSummary_review)"></refresh-date>
+                                        update-time="tumor.prognosticSummary_validateTime.updateTime" location="getLocation('Prognostic Summary', mutation.name, tumor.cancerTypes)"
+                                        updated-by="tumor.prognosticSummary_validateTime.updatedBy" path="path"
+                                        hugo-symbol="gene.name" obj="tumor" disabled="disableRefreshDate(tumor.prognosticSummary_uuid)"></refresh-date>
                           <review-panel hugo-symbol="gene.name" uuid="tumor.prognosticSummary_uuid" review-obj="tumor.prognosticSummary_review" evidence-type="'PROGNOSTIC_SUMMARY'" mutation="mutation" tumor="tumor" get-evidence="getEvidence(type, mutation, tumor)" model-update="modelUpdate(type, mutation, tumor)" get-refs="getRefs(mutation, tumor)"></review-panel>
                       </h5>
                       <realtime-string t="'p'" key="'prognosticSummary'" path="path" uuid="getUUID({type: 'tumor', key: 'prognosticSummary', path: path})" mutation="mutation" tumor="tumor" indicate-mutation-content="indicateMutationContent(mutation)" indicate-tumor-content="indicateTumorContent(tumor)"></realtime-string>
@@ -279,9 +279,9 @@
                     <div ng-show="displayPrecisely(tumor.diagnostic.level_uuid)">
                       <strong>Level of Evidence:</strong>
                         <refresh-date ng-if="tumor.diagnostic.level_validateTime" ng-show="!reviewMode" key="'level'"
-                                      update-time="tumor.diagnostic.level_validateTime.updateTime"
-                                      updated-by="tumor.diagnostic.level_validateTime.updatedBy"
-                                      hugo-symbol="gene.name" obj="tumor.diagnostic" disabled="disableRefreshDate(tumor.diagnostic.level_review)"></refresh-date>
+                                      update-time="tumor.diagnostic.level_validateTime.updateTime" location="getLocation('Diagnostic', mutation.name, tumor.cancerTypes)"
+                                      updated-by="tumor.diagnostic.level_validateTime.updatedBy" path="diagnosticPath"
+                                      hugo-symbol="gene.name" obj="tumor.diagnostic" disabled="disableRefreshDate(tumor.diagnostic.level_uuid)"></refresh-date>
                       <br/>
                       <realtime-string key="'level'" path="diagnosticPath" t="'implication'" o="levels.diagnostic" uuid="getUUID({type: 'diagnostic', key: 'level', path: path})"></realtime-string>
                       <br/>
@@ -289,9 +289,9 @@
                     <div ng-show="displayPrecisely(tumor.diagnostic.description_uuid)">
                       <strong>Description of Evidence:</strong>
                         <refresh-date ng-if="tumor.diagnostic.description_validateTime" ng-show="!reviewMode" key="'description'"
-                                      update-time="tumor.diagnostic.description_validateTime.updateTime"
-                                      updated-by="tumor.diagnostic.description_validateTime.updatedBy"
-                                      hugo-symbol="gene.name" obj="tumor.diagnostic" disabled="disableRefreshDate(tumor.diagnostic.description_review)"></refresh-date>
+                                      update-time="tumor.diagnostic.description_validateTime.updateTime" location="getLocation('Diagnostic', mutation.name, tumor.cancerTypes)"
+                                      updated-by="tumor.diagnostic.description_validateTime.updatedBy" path="diagnosticPath"
+                                      hugo-symbol="gene.name" obj="tumor.diagnostic" disabled="disableRefreshDate(tumor.diagnostic.description_uuid)"></refresh-date>
                       <br/>
                       <realtime-string t="'p'" key="'description'" path="diagnosticPath" uuid="getUUID({type: 'diagnostic', key: 'description', path: path})"></realtime-string>
                     </div>
@@ -314,9 +314,9 @@
                     <div ng-show="displayPrecisely(tumor.prognostic.level_uuid)">
                       <strong>Level of Evidence:</strong>
                         <refresh-date ng-if="tumor.prognostic.level_validateTime" ng-show="!reviewMode" key="'level'"
-                                      update-time="tumor.prognostic.level_validateTime.updateTime"
-                                      updated-by="tumor.prognostic.level_validateTime.updatedBy"
-                                      hugo-symbol="gene.name" obj="tumor.prognostic" disabled="disableRefreshDate(tumor.prognostic.level_review)"></refresh-date>
+                                      update-time="tumor.prognostic.level_validateTime.updateTime" location="getLocation('Prognostic', mutation.name, tumor.cancerTypes)"
+                                      updated-by="tumor.prognostic.level_validateTime.updatedBy" path="prognosticPath"
+                                      hugo-symbol="gene.name" obj="tumor.prognostic" disabled="disableRefreshDate(tumor.prognostic.level_uuid)"></refresh-date>
                       <br/>
                       <realtime-string key="'level'" path="prognosticPath" t="'implication'" o="levels.prognostic" uuid="getUUID({type: 'prognostic', key: 'level', path: path})"></realtime-string>
                       <br/>
@@ -324,9 +324,9 @@
                     <div ng-show="displayPrecisely(tumor.prognostic.description_uuid)">
                       <strong>Description of Evidence:</strong>
                         <refresh-date ng-if="tumor.prognostic.description_validateTime" ng-show="!reviewMode" key="'description'"
-                                      update-time="tumor.prognostic.description_validateTime.updateTime"
-                                      updated-by="tumor.prognostic.description_validateTime.updatedBy"
-                                      hugo-symbol="gene.name" obj="tumor.prognostic" disabled="disableRefreshDate(tumor.prognostic.description_review)"></refresh-date>
+                                      update-time="tumor.prognostic.description_validateTime.updateTime" location="getLocation('Prognostic', mutation.name, tumor.cancerTypes)"
+                                      updated-by="tumor.prognostic.description_validateTime.updatedBy" path="prognosticPath"
+                                      hugo-symbol="gene.name" obj="tumor.prognostic" disabled="disableRefreshDate(tumor.prognostic.description_uuid)"></refresh-date>
                       <br/>
                       <realtime-string t="'p'" key="'description'" path="prognosticPath" uuid="getUUID({type: 'prognostic', key: 'description', path: path})"></realtime-string>
                     </div>
@@ -385,9 +385,9 @@
                             <div ng-show="displayPrecisely(treatment.level_uuid) || displayPrecisely(treatment.propagation_uuid)">
                               <strong>Highest level of evidence:</strong>
                                 <refresh-date ng-if="treatment.level_validateTime" ng-show="!reviewMode" key="'level'"
-                                              update-time="treatment.level_validateTime.updateTime"
-                                              updated-by="treatment.level_validateTime.updatedBy"
-                                              hugo-symbol="gene.name" obj="treatment" disabled="disableRefreshDate(treatment.level_review)"></refresh-date>
+                                              update-time="treatment.level_validateTime.updateTime" location="getLocation('', mutation.name, tumor.cancerTypes, ti.name, treatment.name)"
+                                              updated-by="treatment.level_validateTime.updatedBy" path="path"
+                                              hugo-symbol="gene.name" obj="treatment" disabled="disableRefreshDate(treatment.level_uuid)"></refresh-date>
                               <div ng-switch on="ti.type">
                                 <div ng-switch-when="SS">
                                   <realtime-string key="'level'" path="path" t="'treatment-select'" o="levels.SS" uuid="getUUID({type: 'treatment', key: 'level', path: path})" mutation="mutation" tumor="tumor" indicate-mutation-content="indicateMutationContent(mutation)" indicate-tumor-content="indicateTumorContent(tumor)"></realtime-string>
@@ -408,18 +408,18 @@
                             <div ng-show="displayPrecisely(treatment.indication_uuid)">
                               <strong>FDA approved indications:</strong>
                                 <refresh-date ng-if="treatment.indication_validateTime" ng-show="!reviewMode" key="'indication'"
-                                              update-time="treatment.indication_validateTime.updateTime"
-                                              updated-by="treatment.indication_validateTime.updatedBy"
-                                              hugo-symbol="gene.name" obj="treatment" disabled="disableRefreshDate(treatment.indication_review)"></refresh-date>
+                                              update-time="treatment.indication_validateTime.updateTime" location="getLocation('', mutation.name, tumor.cancerTypes, ti.name, treatment.name)"
+                                              updated-by="treatment.indication_validateTime.updatedBy" path="path"
+                                              hugo-symbol="gene.name" obj="treatment" disabled="disableRefreshDate(treatment.indication_uuid)"></refresh-date>
                               <br/>
                               <realtime-string t="'p'" key="'indication'" path="path" uuid="getUUID({type: 'treatment', key: 'indication', path: path})"></realtime-string>
                             </div>
                             <div ng-show="displayPrecisely(treatment.description_uuid)">
                               <strong>Description of Evidence:</strong>
                                 <refresh-date ng-if="treatment.description_validateTime" ng-show="!reviewMode" key="'description'"
-                                              update-time="treatment.description_validateTime.updateTime"
-                                              updated-by="treatment.description_validateTime.updatedBy"
-                                              hugo-symbol="gene.name" obj="treatment" disabled="disableRefreshDate(treatment.description_review)"></refresh-date>
+                                              update-time="treatment.description_validateTime.updateTime" location="getLocation('', mutation.name, tumor.cancerTypes, ti.name, treatment.name)"
+                                              updated-by="treatment.description_validateTime.updatedBy" path="path"
+                                              hugo-symbol="gene.name" obj="treatment" disabled="disableRefreshDate(treatment.description_uuid)"></refresh-date>
                               <br/>
                               <realtime-string t="'p'" key="'description'" path="path" uuid="getUUID({type: 'treatment', key: 'description', path: path})"></realtime-string>
                             </div>

@@ -9,7 +9,7 @@ angular.module('oncokbApp')
                 $scope.newGenes = [];
                 $scope.loading = false;
                 $scope.includeUUID = false;
-                $scope.typeCheckboxes = ['update', 'name change', 'add', 'delete'];
+                $scope.typeCheckboxes = ['update', 'name change', 'add', 'delete', 'validation time'];
                 $scope.selectedTypeCheckboxes = [];
                 $scope.dateRange = {startDate: null, endDate: null};
                 $scope.dateRangeOptions = {
@@ -258,14 +258,14 @@ angular.module('oncokbApp')
             }];
             $scope.reviewedData = {
                 geneSummary: {
-                    header: ['Gene', 'Summary', 'Last Edit'],
+                    header: ['Gene', 'Summary', 'Last Validation'],
                     body: [],
                     keys: ['gene', 'summary', 'lastEdit'],
                     fileName: 'GeneSummary.xls',
                     evidenceTypes: 'GENE_SUMMARY'
                 },
                 geneBackground: {
-                    header: ['Gene', 'Background', 'Last Edit'],
+                    header: ['Gene', 'Background', 'Last Validation'],
                     body: [],
                     keys: ['gene', 'background', 'lastEdit'],
                     fileName: 'GeneBackground.xls',
@@ -279,56 +279,56 @@ angular.module('oncokbApp')
                     evidenceTypes: 'geneType'
                 },
                 mutationEffect: {
-                    header:['Gene', 'Mutation', 'Oncogenic', 'Mutation Effect', 'Description', 'Citations', 'Last Edit'],
+                    header:['Gene', 'Mutation', 'Oncogenic', 'Mutation Effect', 'Description', 'Citations', 'Last Validation'],
                     body: [],
                     keys: ['gene', 'mutation', 'oncogenic', 'mutationEffect', 'description', 'citations', 'lastEdit'],
                     fileName: 'MutationEffect.xls',
                     evidenceTypes: 'MUTATION_EFFECT,ONCOGENIC'
                 },
                 tumorSummary: {
-                    header: ['Gene', 'Mutation', 'Tumor Type', 'Tumor Summary', 'Last Edit'],
+                    header: ['Gene', 'Mutation', 'Tumor Type', 'Tumor Summary', 'Last Validation'],
                     body: [],
                     keys: ['gene', 'mutation', 'tumorType', 'tumorSummary', 'lastEdit'],
                     fileName: 'TumorTypeSummary.xls',
                     evidenceTypes: 'TUMOR_TYPE_SUMMARY'
                 },
                 diagnosticSummary: {
-                    header: ['Gene', 'Mutation', 'Tumor Type', 'Diagnostic Summary', 'Last Edit'],
+                    header: ['Gene', 'Mutation', 'Tumor Type', 'Diagnostic Summary', 'Last Validation'],
                     body: [],
                     keys: ['gene', 'mutation', 'tumorType', 'summary', 'lastEdit'],
                     fileName: 'DiagnosticSummary.xls',
                     evidenceTypes: 'DIAGNOSTIC_SUMMARY'
                 },
                 prognosticSummary: {
-                    header: ['Gene', 'Mutation', 'Tumor Type', 'Prognostic Summary', 'Last Edit'],
+                    header: ['Gene', 'Mutation', 'Tumor Type', 'Prognostic Summary', 'Last Validation'],
                     body: [],
                     keys: ['gene', 'mutation', 'tumorType', 'summary', 'lastEdit'],
                     fileName: 'PrognosticSummary.xls',
                     evidenceTypes: 'PROGNOSTIC_SUMMARY'
                 },
                 diagnosticImplication: {
-                    header: ['Gene', 'Mutation', 'Tumor Type', 'Level', 'Description', 'Last Edit'],
+                    header: ['Gene', 'Mutation', 'Tumor Type', 'Level', 'Description', 'Last Validation'],
                     body: [],
                     keys: ['gene', 'mutation', 'tumorType', 'level', 'description', 'lastEdit'],
                     fileName: 'DiagnosticImplication.xls',
                     evidenceTypes: 'DIAGNOSTIC_IMPLICATION'
                 },
                 prognosticImplication: {
-                    header: ['Gene', 'Mutation', 'Tumor Type', 'Level', 'Description', 'Last Edit'],
+                    header: ['Gene', 'Mutation', 'Tumor Type', 'Level', 'Description', 'Last Validation'],
                     body: [],
                     keys: ['gene', 'mutation', 'tumorType', 'level', 'description', 'lastEdit'],
                     fileName: 'PrognosticImplication.xls',
                     evidenceTypes: 'PROGNOSTIC_IMPLICATION'
                 },
                 ttsDrugs: {
-                    header: ['Gene', 'Mutation', 'Tumor Type', 'Tumor Summary', 'Drugs', 'Level', 'Last Edit'],
+                    header: ['Gene', 'Mutation', 'Tumor Type', 'Tumor Summary', 'Drugs', 'Level', 'Last Validation'],
                     body: [],
                     keys: ['gene', 'mutation', 'tumorType', 'tumorSummary', 'drugs', 'level', 'lastEdit'],
                     fileName: 'TumorTypeSummaryDrugs.xls',
                     evidenceTypes: 'TUMOR_TYPE_SUMMARY,STANDARD_THERAPEUTIC_IMPLICATIONS_FOR_DRUG_SENSITIVITY,STANDARD_THERAPEUTIC_IMPLICATIONS_FOR_DRUG_RESISTANCE,INVESTIGATIONAL_THERAPEUTIC_IMPLICATIONS_DRUG_SENSITIVITY,INVESTIGATIONAL_THERAPEUTIC_IMPLICATIONS_DRUG_RESISTANCE'
                 },
                 drugs: {
-                    header: ['Gene', 'Mutation', 'Tumor Type', 'Drugs', 'Level', 'Propagation', 'Description', 'Citations', 'Last Edit'],
+                    header: ['Gene', 'Mutation', 'Tumor Type', 'Drugs', 'Level', 'Propagation', 'Description', 'Citations', 'Last Validation'],
                     body: [],
                     keys: ['gene', 'mutation', 'tumorType', 'drugs', 'level', 'propagation', 'description', 'citations', 'lastEdit'],
                     fileName: 'Therapeutics.xls',
@@ -404,7 +404,6 @@ angular.module('oncokbApp')
                                         gene: item.hugoSymbol,
                                         oncogene: item.oncogene,
                                         tsg: item.tsg,
-                                        lastEdit: item.lastEdit,
                                         truncatingMutations: false,
                                         deletion: false,
                                         amplification: false
