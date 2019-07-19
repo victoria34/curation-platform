@@ -968,6 +968,18 @@ input[type=radio]:checked + label:before, input[type=checkbox]:checked + label:b
     display: flex;
 }
 
+.refresh-date {
+  font-size: 15px;
+
+  i.danger {
+    color: rgb(217, 83, 79);
+  }
+
+  i.warning {
+    color: rgb(240, 173, 78);
+  }
+}
+
 .addTherapy {
     .latestResultDiv{
         margin-bottom: 10px;
@@ -1002,8 +1014,11 @@ input[type=radio]:checked + label:before, input[type=checkbox]:checked + label:b
     color: red !important;
 }
 .reviewedData {
-  width: 200px;
+  width: 150px;
   word-break: break-all;
+}
+.timestamp{
+  width: 100px;
 }
 .queryLabel {
   margin-right: -80px;
@@ -1117,6 +1132,7 @@ input[type=radio]:checked + label:before, input[type=checkbox]:checked + label:b
     color: #000000;
     background-color: #ccc;
 }
+<<<<<<< HEAD
 
 .direct-descendants-margin {
   :first-child {
@@ -1169,4 +1185,14 @@ input[type=radio]:checked + label:before, input[type=checkbox]:checked + label:b
 }
 .margin-bottom-0 {
   margin-bottom: 0;
+}
+.gene-type {
+  display: inline-flex;
+}
+.gene-type-ocg-in-review {
+  margin-top: -25px;
+  margin-left: 150px;
+}
+.clock-margin {
+  margin-left: 5px;
 }

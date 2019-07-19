@@ -1,5 +1,5 @@
 <span>
-  <i ng-hide="status.rendering" class="fa " ng-class="{'fa-comments-o': !status.hasComment, 'fa-comments': status.hasComment, 'fa-comments-orange': status.hasComment && !status.allResolved, 'fa-comments-green': status.hasComment && status.allResolved}">
+  <i ng-hide="status.rendering" class="fa" ng-class="{'fa-comments-o': !status.hasComment, 'fa-comments': status.hasComment, 'fa-comments-orange': status.hasComment && !status.allResolved, 'fa-comments-green': status.hasComment && status.allResolved}">
     <commentsBody class="geneComments">
       <div ng-repeat="comment in obj[key+'_comments']">
         <div class="body">

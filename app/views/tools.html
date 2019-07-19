@@ -105,7 +105,7 @@
         <div class="col-sm-2">
             <button type="button" class="btn btn-default" ng-click="generateEvidences()" ng-disabled="!data.evidenceType" ng-bind-html="getReviewButtonContent()"></button>
         </div>
-        <div class="col-sm-1" ng-if="displayReviewedData">
+        <div class="col-sm-1 date-range-column" ng-if="displayReviewedData">
             <button type="button" class="btn btn-default" ng-click="downloadReviewedData()"> Download </button>
         </div>
     </div>
@@ -126,6 +126,10 @@
                             <div ng-if="data.evidenceType !== 'drugs'">
                                 <div class="reviewedData" ng-switch-when="mutation">{{item.mutation}}</div>
                                 <div class="reviewedData" ng-switch-when="drugs">{{item.drugs}}</div>
+                            </div>
+                            <div class="timestamp" ng-switch-when="lastEdit">
+                                {{ item.lastEdit |  date:'yyyy-MM-dd' }}
+                                <refresh-date type="'tools'" hugo-symbol="item.gene" obj="item" key="data.evidenceType" update-time="item.lastEdit"></refresh-date>
                             </div>
                             <div ng-switch-default>{{ item[key] }}</div>
                         </div>

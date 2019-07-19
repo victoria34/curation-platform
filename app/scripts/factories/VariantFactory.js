@@ -613,12 +613,9 @@ angular.module('oncokbApp')
                 value: new Date().getTime()
             };
         }
-        function TimeStamp(userName, userEmail) {
-            this.by = {
-                name: userName,
-                email: userEmail
-            };
-            this.value = (new Date()).getTime().toString();
+        function Timestamp(username) {
+            this.updatedBy = username;
+            this.updateTime = new Date().getTime();
         }
         function Meta() {
             this.lastModifiedBy = $rootScope.me.name;
@@ -646,7 +643,7 @@ angular.module('oncokbApp')
             Comment: Comment,
             Cancertype: Cancertype,
             VUSItem: VUSItem,
-            TimeStamp: TimeStamp,
+            Timestamp: Timestamp,
             Meta: Meta,
             Setting: Setting,
             Drug: Drug,

@@ -258,16 +258,16 @@ angular.module('oncokbApp')
             }];
             $scope.reviewedData = {
                 geneSummary: {
-                    header: ['Gene', 'Summary'],
+                    header: ['Gene', 'Summary', 'Last Edit'],
                     body: [],
-                    keys: ['gene', 'summary'],
+                    keys: ['gene', 'summary', 'lastEdit'],
                     fileName: 'GeneSummary.xls',
                     evidenceTypes: 'GENE_SUMMARY'
                 },
                 geneBackground: {
-                    header: ['Gene', 'Background'],
+                    header: ['Gene', 'Background', 'Last Edit'],
                     body: [],
-                    keys: ['gene', 'background'],
+                    keys: ['gene', 'background', 'lastEdit'],
                     fileName: 'GeneBackground.xls',
                     evidenceTypes: 'GENE_BACKGROUND'
                 },
@@ -279,58 +279,58 @@ angular.module('oncokbApp')
                     evidenceTypes: 'geneType'
                 },
                 mutationEffect: {
-                    header:['Gene', 'Mutation', 'Oncogenic', 'Mutation Effect', 'Description', 'Citations'],
+                    header:['Gene', 'Mutation', 'Oncogenic', 'Mutation Effect', 'Description', 'Citations', 'Last Edit'],
                     body: [],
-                    keys: ['gene', 'mutation', 'oncogenic', 'mutationEffect', 'description', 'citations'],
+                    keys: ['gene', 'mutation', 'oncogenic', 'mutationEffect', 'description', 'citations', 'lastEdit'],
                     fileName: 'MutationEffect.xls',
                     evidenceTypes: 'MUTATION_EFFECT,ONCOGENIC'
                 },
                 tumorSummary: {
-                    header: ['Gene', 'Mutation', 'Tumor Type', 'Tumor Summary'],
+                    header: ['Gene', 'Mutation', 'Tumor Type', 'Tumor Summary', 'Last Edit'],
                     body: [],
-                    keys: ['gene', 'mutation', 'tumorType', 'tumorSummary'],
+                    keys: ['gene', 'mutation', 'tumorType', 'tumorSummary', 'lastEdit'],
                     fileName: 'TumorTypeSummary.xls',
                     evidenceTypes: 'TUMOR_TYPE_SUMMARY'
                 },
                 diagnosticSummary: {
-                    header: ['Gene', 'Mutation', 'Tumor Type', 'Diagnostic Summary'],
+                    header: ['Gene', 'Mutation', 'Tumor Type', 'Diagnostic Summary', 'Last Edit'],
                     body: [],
-                    keys: ['gene', 'mutation', 'tumorType', 'summary'],
+                    keys: ['gene', 'mutation', 'tumorType', 'summary', 'lastEdit'],
                     fileName: 'DiagnosticSummary.xls',
                     evidenceTypes: 'DIAGNOSTIC_SUMMARY'
                 },
                 prognosticSummary: {
-                    header: ['Gene', 'Mutation', 'Tumor Type', 'Prognostic Summary'],
+                    header: ['Gene', 'Mutation', 'Tumor Type', 'Prognostic Summary', 'Last Edit'],
                     body: [],
-                    keys: ['gene', 'mutation', 'tumorType', 'summary'],
+                    keys: ['gene', 'mutation', 'tumorType', 'summary', 'lastEdit'],
                     fileName: 'PrognosticSummary.xls',
                     evidenceTypes: 'PROGNOSTIC_SUMMARY'
                 },
                 diagnosticImplication: {
-                    header: ['Gene', 'Mutation', 'Tumor Type', 'Level', 'Description'],
+                    header: ['Gene', 'Mutation', 'Tumor Type', 'Level', 'Description', 'Last Edit'],
                     body: [],
-                    keys: ['gene', 'mutation', 'tumorType', 'level', 'description'],
+                    keys: ['gene', 'mutation', 'tumorType', 'level', 'description', 'lastEdit'],
                     fileName: 'DiagnosticImplication.xls',
                     evidenceTypes: 'DIAGNOSTIC_IMPLICATION'
                 },
                 prognosticImplication: {
-                    header: ['Gene', 'Mutation', 'Tumor Type', 'Level', 'Description'],
+                    header: ['Gene', 'Mutation', 'Tumor Type', 'Level', 'Description', 'Last Edit'],
                     body: [],
-                    keys: ['gene', 'mutation', 'tumorType', 'level', 'description'],
+                    keys: ['gene', 'mutation', 'tumorType', 'level', 'description', 'lastEdit'],
                     fileName: 'PrognosticImplication.xls',
                     evidenceTypes: 'PROGNOSTIC_IMPLICATION'
                 },
                 ttsDrugs: {
-                    header: ['Gene', 'Mutation', 'Tumor Type', 'Tumor Summary', 'Drugs', 'Level'],
+                    header: ['Gene', 'Mutation', 'Tumor Type', 'Tumor Summary', 'Drugs', 'Level', 'Last Edit'],
                     body: [],
-                    keys: ['gene', 'mutation', 'tumorType', 'tumorSummary', 'drugs', 'level'],
+                    keys: ['gene', 'mutation', 'tumorType', 'tumorSummary', 'drugs', 'level', 'lastEdit'],
                     fileName: 'TumorTypeSummaryDrugs.xls',
-                    evidenceTypes: 'TUMOR_TYPE_SUMMARY,DIAGNOSTIC_SUMMARY, PROGNOSTIC_SUMMARY, STANDARD_THERAPEUTIC_IMPLICATIONS_FOR_DRUG_SENSITIVITY,STANDARD_THERAPEUTIC_IMPLICATIONS_FOR_DRUG_RESISTANCE,INVESTIGATIONAL_THERAPEUTIC_IMPLICATIONS_DRUG_SENSITIVITY,INVESTIGATIONAL_THERAPEUTIC_IMPLICATIONS_DRUG_RESISTANCE'
+                    evidenceTypes: 'TUMOR_TYPE_SUMMARY,STANDARD_THERAPEUTIC_IMPLICATIONS_FOR_DRUG_SENSITIVITY,STANDARD_THERAPEUTIC_IMPLICATIONS_FOR_DRUG_RESISTANCE,INVESTIGATIONAL_THERAPEUTIC_IMPLICATIONS_DRUG_SENSITIVITY,INVESTIGATIONAL_THERAPEUTIC_IMPLICATIONS_DRUG_RESISTANCE'
                 },
                 drugs: {
-                    header: ['Gene', 'Mutation', 'Tumor Type', 'Drugs', 'Level', 'Propagation', 'Description', 'Citations'],
+                    header: ['Gene', 'Mutation', 'Tumor Type', 'Drugs', 'Level', 'Propagation', 'Description', 'Citations', 'Last Edit'],
                     body: [],
-                    keys: ['gene', 'mutation', 'tumorType', 'drugs', 'level', 'propagation', 'description', 'citations'],
+                    keys: ['gene', 'mutation', 'tumorType', 'drugs', 'level', 'propagation', 'description', 'citations', 'lastEdit'],
                     fileName: 'Therapeutics.xls',
                     evidenceTypes: 'STANDARD_THERAPEUTIC_IMPLICATIONS_FOR_DRUG_SENSITIVITY,STANDARD_THERAPEUTIC_IMPLICATIONS_FOR_DRUG_RESISTANCE,INVESTIGATIONAL_THERAPEUTIC_IMPLICATIONS_DRUG_SENSITIVITY,INVESTIGATIONAL_THERAPEUTIC_IMPLICATIONS_DRUG_RESISTANCE'
                 }
@@ -354,7 +354,9 @@ angular.module('oncokbApp')
                         var key = $scope.reviewedData[$scope.data.evidenceType].keys[1];
                         _.each(response.data, function(item) {
                             var tempObj = {
-                                gene: item.gene.hugoSymbol
+                                gene: item.gene.hugoSymbol,
+                                lastEdit: item.lastEdit,
+                                uuid: item.uuid
                             };
                             tempObj[key] = item.description;
                             $scope.reviewedData[$scope.data.evidenceType].body.push(tempObj);
@@ -402,6 +404,7 @@ angular.module('oncokbApp')
                                         gene: item.hugoSymbol,
                                         oncogene: item.oncogene,
                                         tsg: item.tsg,
+                                        lastEdit: item.lastEdit,
                                         truncatingMutations: false,
                                         deletion: false,
                                         amplification: false
@@ -424,6 +427,7 @@ angular.module('oncokbApp')
                             if (flag === false) {
                                 var newEvidence = {
                                     gene: item.gene.hugoSymbol,
+                                    lastEdit: item.lastEdit,
                                     mutation: getAlterations(item.alterations)
                                 };
                                 constructMEObj(item, newEvidence);
@@ -443,7 +447,9 @@ angular.module('oncokbApp')
                                     var tempObj =  {
                                         gene: item.gene.hugoSymbol,
                                         mutation: getAlterations(item.alterations),
-                                        tumorSummary: item.description
+                                        tumorSummary: item.description,
+                                        summary_uuid: item.uuid,
+                                        lastEdit: item.lastEdit
                                     };
                                     if (item.subtype) {
                                         tempObj.tumorType = subtypeMapping[item.subtype];
@@ -464,9 +470,11 @@ angular.module('oncokbApp')
                                             mutation: getAlterations(item.alterations),
                                             drugs: drugs.join(),
                                             level: item.levelOfEvidence,
+                                            treatment_name_uuid: item.uuid,
                                             propagation: item.propagation,
                                             description: item.description,
-                                            citations: getCitations(item.description)
+                                            citations: getCitations(item.description),
+                                            lastEdit: item.lastEdit
                                         };
                                         if (item.subtype) {
                                             tempObj.tumorType = subtypeMapping[item.subtype];
@@ -491,12 +499,16 @@ angular.module('oncokbApp')
                                         if (drugsMapping[key]) {
                                             drugsMapping[key].push({
                                                 drugs: drugs.join(),
-                                                level: item.levelOfEvidence
+                                                level: item.levelOfEvidence,
+                                                description: item.description,
+                                                uuid: item.uuid
                                             });
                                         } else {
                                             drugsMapping[key] = [{
                                                 drugs: drugs.join(),
-                                                level: item.levelOfEvidence
+                                                level: item.levelOfEvidence,
+                                                description: item.description,
+                                                uuid: item.uuid
                                             }];
                                         }
                                     }
@@ -513,8 +525,11 @@ angular.module('oncokbApp')
                                                     mutation: getAlterations(item.alterations),
                                                     tumorType: tempTT,
                                                     tumorSummary: item.description,
+                                                    summary_uuid: item.uuid,
+                                                    treatment_name_uuid: drugItem.uuid,
                                                     drugs: drugItem.drugs,
-                                                    level: drugItem.level
+                                                    level: drugItem.level,
+                                                    lastEdit: item.lastEdit
                                                 };
                                                 $scope.reviewedData.ttsDrugs.body.push(tempObj);
                                             });
@@ -523,7 +538,9 @@ angular.module('oncokbApp')
                                                 gene: item.gene.hugoSymbol,
                                                 mutation: getAlterations(item.alterations),
                                                 tumorType: tempTT,
-                                                tumorSummary: item.description
+                                                tumorSummary: item.description,
+                                                summary_uuid: item.uuid,
+                                                lastEdit: item.lastEdit
                                             };
                                             $scope.reviewedData.ttsDrugs.body.push(tempObj);
                                         }
@@ -534,13 +551,16 @@ angular.module('oncokbApp')
                                 _.each(response.data, function (item) {
                                     var tempObj =  {
                                         gene: item.gene.hugoSymbol,
-                                        mutation: getAlterations(item.alterations)
+                                        mutation: getAlterations(item.alterations),
+                                        lastEdit: item.lastEdit
                                     };
                                     if ($scope.data.evidenceType === 'diagnosticSummary' || $scope.data.evidenceType === 'prognosticSummary') {
                                         tempObj.summary = item.description;
+                                        tempObj.summary_uuid = item.uuid;
                                     } else {
                                         tempObj.level = item.levelOfEvidence;
-                                        tempObj.description = item.description
+                                        tempObj.description = item.description;
+                                        tempObj.implication_uuid = item.uuid;
                                     }
                                     if (item.subtype) {
                                         tempObj.tumorType = subtypeMapping[item.subtype];
@@ -586,9 +606,11 @@ angular.module('oncokbApp')
                 if (item.evidenceType === 'MUTATION_EFFECT') {
                     evidence['mutationEffect'] = item.knownEffect;
                     evidence['description'] = item.description;
+                    evidence['effect_uuid'] = item.uuid;
                     evidence['citations'] = getCitations(item.description);
                 } else if (item.evidenceType === 'ONCOGENIC') {
                     evidence['oncogenic'] = item.knownEffect;
+                    evidence['oncogenic_uuid'] = item.uuid;
                 }
             }
             $scope.downloadReviewedData = function() {

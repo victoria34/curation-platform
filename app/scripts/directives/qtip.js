@@ -14,7 +14,8 @@ angular.module('oncokbApp')
                 time: '=',
                 by: '=',
                 abstracts: '=',
-                pmids: '='
+                pmids: '=',
+                timeTitle: '='
             },
             link: function(scope, element, attrs) {
                 var src = '';
@@ -155,15 +156,19 @@ angular.module('oncokbApp')
                         delay: 500
                     }
                 };
-
-                if (['vusItem', 'map', 'evidence', 'level'].indexOf(attrs.type) !== -1 || (attrs.number !== undefined && attrs.number.length > 0)) {
+                if (['vusItem', 'map', 'evidence', 'level', 'timestamp'].indexOf(attrs.type) !== -1 || (attrs.number !== undefined && attrs.number.length > 0)
+                    || (attrs.content !== undefined && attrs.content.length > 0)) {
                     $(element).qtip(options);
                 }
 
                 scope.$watch('time', function(n) {
                     if (n) {
                         if ($(element).data('qtip')) {
-                            $(element).qtip('api').set('content.text', '<span>Last edit: ' + new Date(scope.time).toLocaleDateString() + '</span><br/><span>By: ' + scope.by + '</span>');
+                            var html = '<span>' + scope.timeTitle + ': ' + new Date(scope.time).toLocaleDateString() + '</span><br/>';
+                            if (scope.by) {
+                                html += '<span>By: ' + scope.by + '</span>';
+                            }
+                            $(element).qtip('api').set('content.text', html);
                         }
                     }
                 });
