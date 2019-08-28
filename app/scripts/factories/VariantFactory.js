@@ -298,6 +298,17 @@ angular.module('oncokbApp').factory('DriveAnnotation', ['$http', 'OncoKB', '_', 
         }
     }
 
+    function updateEvidenceLastReview(data) {
+        return $http.post(
+            OncoKB.config.apiLink + 'evidences/lastReview/update',
+            data,
+            {
+                transformResponse: function(result) {
+                    return {status: result};
+                }
+            });
+    }
+
     return {
         updateGene: updateGene,
         updateGeneType: updateGeneType,
@@ -308,7 +319,8 @@ angular.module('oncokbApp').factory('DriveAnnotation', ['$http', 'OncoKB', '_', 
         getEvidencesByUUID: getEvidencesByUUID,
         getEvidencesByUUIDs: getEvidencesByUUIDs,
         getPubMedArticle: getPubMedArticle,
-        getClinicalTrial: getClinicalTrial
+        getClinicalTrial: getClinicalTrial,
+        updateEvidenceLastReview: updateEvidenceLastReview
     };
 }]);
 

@@ -583,6 +583,22 @@ angular.module('oncokbApp')
                 }
             }
 
+            function updateEvidenceLastReview(data, historyData, success, fail) {
+                if (testing) {
+                    success('');
+                    addHisotryRecord(historyData);
+                } else {
+                    DriveAnnotation
+                        .updateEvidenceLastReview(data)
+                        .then(function(data) {
+                            success(data);
+                            addHisotryRecord(historyData);
+                        }, function() {
+                            fail();
+                        });
+                }
+            }
+
             // Public API here
             return {
                 searchNCITDrugs: searchNCITDrugs,
@@ -625,6 +641,7 @@ angular.module('oncokbApp')
                 getReviewedData: getReviewedData,
                 lookupVariants: lookupVariants,
                 getMainTypes: getMainTypes,
-                getSubTypes: getSubTypes
+                getSubTypes: getSubTypes,
+                updateEvidenceLastReview: updateEvidenceLastReview
             };
         }]);

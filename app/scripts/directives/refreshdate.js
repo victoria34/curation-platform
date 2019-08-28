@@ -36,22 +36,26 @@ angular.module('oncokbApp')
                     if ($scope.type === 'tools') {
                         validateTimeInTools();
                     } else {
-                        mainUtils.validateTime($scope.obj, $scope.key);
-                        firebaseConnector.set($scope.path + '/' + $scope.key + '_validateTime', $scope.obj[$scope.key + '_validateTime']).then(function(result) {
-                            var historyData = [{
-                                location: $scope.location,
-                                operation: 'validation time',
-                                uuids: $scope.obj[$scope.key + '_uuid']
-                            }];
-                            if ($scope.location === 'Gene Type') {
-                                historyData[0].new = $scope.obj;
-                            } else {
-                                historyData[0].new = $scope.obj[$scope.key];
-                            }
-                            historyData.hugoSymbol = $scope.hugoSymbol;
-                            DatabaseConnector.addHisotryRecord(historyData);
+                        mainUtils.validateTime($scope.obj, [$scope.key]);
+                        var data = {};
+                        data[$scope.obj[$scope.key + '_uuid']] = $scope.obj[$scope.key + '_validateTime'].updateTime;
+                        var historyData = [{
+                            location: $scope.location,
+                            operation: 'validation time',
+                            uuids: $scope.obj[$scope.key + '_uuid']
+                        }];
+                        if ($scope.location === 'Gene Type') {
+                            historyData[0].new = $scope.obj;
+                        } else {
+                            historyData[0].new = $scope.obj[$scope.key];
+                        }
+                        historyData.hugoSymbol = $scope.hugoSymbol;
+                        DatabaseConnector.updateEvidenceLastReview(data, historyData, function(){
+                            $scope.updateTime = $scope.obj[$scope.key + '_validateTime'].updateTime;
                             $scope.clicked = false;
+                            firebaseConnector.set($scope.path + '/' + $scope.key + '_validateTime', $scope.obj[$scope.key + '_validateTime']);
                         }, function (error) {
+                            $scope.clicked = false;
                             console.log("Error:", error);
                         });
                     }
@@ -228,18 +232,25 @@ angular.module('oncokbApp')
 
                 function updateTimeForReviewedContentInTools(validateTimePath, historyData) {
                     var validateTimeObj = new FirebaseModel.Timestamp($rootScope.me.name);
-                    _.forEach(validateTimePath, function(path) {
-                        firebaseConnector.set("Genes/" + $scope.hugoSymbol + '/' + path, validateTimeObj).then(function(result) {
-                            if ($scope.clicked) {
-                                $scope.updateTime = validateTimeObj.updateTime;
-                                $scope.clicked = false;
-                            }
-                            historyData.hugoSymbol = $scope.hugoSymbol;
-                            DatabaseConnector.addHisotryRecord(historyData);
-                        }, function (error) {
-                            console.log("Error:", error);
+                    var data = {};
+                    _.forEach(historyData, function (history) {
+                        var uuids = history.uuids.split(', ');
+                        _.forEach(uuids, function(uuid) {
+                            data[uuid] = validateTimeObj.updateTime;
                         });
                     });
+                    historyData.hugoSymbol = $scope.hugoSymbol;
+                    DatabaseConnector.updateEvidenceLastReview(data, historyData, function(){
+                        $scope.updateTime = validateTimeObj.updateTime;
+                        $scope.clicked = false;
+                        _.forEach(validateTimePath, function(path) {
+                            firebaseConnector.set("Genes/" + $scope.hugoSymbol + '/' + path, validateTimeObj);
+                        });
+                    }, function (error) {
+                        $scope.clicked = false;
+                        console.log("Error:", error);
+                    });
+
                 }
             }
         };

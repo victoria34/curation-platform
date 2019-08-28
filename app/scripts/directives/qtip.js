@@ -14,8 +14,7 @@ angular.module('oncokbApp')
                 time: '=',
                 by: '=',
                 abstracts: '=',
-                pmids: '=',
-                timeTitle: '='
+                pmids: '='
             },
             link: function(scope, element, attrs) {
                 var src = '';
@@ -49,6 +48,8 @@ angular.module('oncokbApp')
                     at = 'bottom right';
                 } else if (attrs.type === 'vusItem') {
                     content = '<span>Last edit: ' + new Date(scope.time).toLocaleDateString() + '</span><br/><span>By: ' + scope.by + '</span>';
+                } else if (attrs.type === 'timestamp') {
+                    content = '<span>Last review: ' + new Date(scope.time).toLocaleDateString() + '</span><br/><span>By: ' + scope.by + '</span>';
                 } else if (attrs.type === 'map') {
                     content = attrs.content;
                 } else if (attrs.type === 'evidence') {
@@ -164,7 +165,13 @@ angular.module('oncokbApp')
                 scope.$watch('time', function(n) {
                     if (n) {
                         if ($(element).data('qtip')) {
-                            var html = '<span>' + scope.timeTitle + ': ' + new Date(scope.time).toLocaleDateString() + '</span><br/>';
+                            var title = '';
+                            if (attrs.type === 'vusItem') {
+                                title = 'Last edit';
+                            } else if (attrs.type === 'timestamp') {
+                                title = 'Last review';
+                            }
+                            var html = '<span>' + title + ': ' + new Date(scope.time).toLocaleDateString() + '</span><br/>';
                             if (scope.by) {
                                 html += '<span>By: ' + scope.by + '</span>';
                             }

@@ -989,6 +989,7 @@ angular.module('oncokbApp')
                     },
                     knownEffect: null,
                     lastEdit: null,
+                    lastReview: new Date().getTime(),
                     levelOfEvidence: null,
                     subtype: null,
                     articles: [],
@@ -1406,61 +1407,72 @@ angular.module('oncokbApp')
                 switch (type) {
                     case 'GENE_SUMMARY':
                         acceptItem([{ reviewObj: $scope.gene.summary_review, uuid: $scope.gene.summary_uuid }], $scope.gene.summary_uuid);
-                        mainUtils.validateTime($scope.gene, 'summary');
+                        mainUtils.validateTime($scope.gene, ['summary']);
                         break;
                     case 'GENE_BACKGROUND':
                         acceptItem([{ reviewObj: $scope.gene.background_review, uuid: $scope.gene.background_uuid }], $scope.gene.background_uuid);
-                        mainUtils.validateTime($scope.gene, 'background');
+                        mainUtils.validateTime($scope.gene, ['background']);
                         break;
                     case 'GENE_TYPE':
                         acceptItem([{ reviewObj: $scope.gene.type.tsg_review, uuid: $scope.gene.type.tsg_uuid }, { reviewObj: $scope.gene.type.ocg_review, uuid: $scope.gene.type.ocg_uuid }], $scope.gene.type_uuid);
-                        mainUtils.validateTime($scope.gene.type, 'tsg');
-                        mainUtils.validateTime($scope.gene.type, 'ocg');
+                        mainUtils.validateTime($scope.gene.type, ['tsg', 'ocg']);
                         break;
                     case 'MUTATION_EFFECT':
                         acceptItem([{ reviewObj: mutation.mutation_effect.oncogenic_review, uuid: mutation.mutation_effect.oncogenic_uuid },
                         { reviewObj: mutation.mutation_effect.effect_review, uuid: mutation.mutation_effect.effect_uuid },
                         { reviewObj: mutation.mutation_effect.description_review, uuid: mutation.mutation_effect.description_uuid }], mutation.mutation_effect_uuid);
+                        var keysToUpdateTimestamp = [];
                         if (ReviewResource.precise.includes(mutation.mutation_effect.oncogenic_uuid)) {
-                            mainUtils.validateTime(mutation.mutation_effect, 'oncogenic');
+                            keysToUpdateTimestamp.push('oncogenic');
                         }
                         if (ReviewResource.precise.includes(mutation.mutation_effect.effect_uuid)) {
-                            mainUtils.validateTime(mutation.mutation_effect, 'effect');
+                            keysToUpdateTimestamp.push('effect');
                         }
                         if (ReviewResource.precise.includes(mutation.mutation_effect.description_uuid)) {
-                            mainUtils.validateTime(mutation.mutation_effect, 'description');
+                            keysToUpdateTimestamp.push('description');
+                        }
+                        if (keysToUpdateTimestamp.length > 0) {
+                            mainUtils.validateTime(mutation.mutation_effect, keysToUpdateTimestamp);
                         }
                         break;
                     case 'TUMOR_TYPE_SUMMARY':
                         acceptItem([{ reviewObj: tumor.summary_review, uuid: tumor.summary_uuid }], tumor.summary_uuid);
-                        mainUtils.validateTime(tumor, 'summary');
+                        mainUtils.validateTime(tumor, ['summary']);
                         break;
                     case 'DIAGNOSTIC_SUMMARY':
                         acceptItem([{ reviewObj: tumor.diagnosticSummary_review, uuid: tumor.diagnosticSummary_uuid }], tumor.diagnosticSummary_uuid);
-                        mainUtils.validateTime(tumor, 'diagnosticSummary');
+                        mainUtils.validateTime(tumor, ['diagnosticSummary']);
                         break;
                     case 'PROGNOSTIC_SUMMARY':
                         acceptItem([{ reviewObj: tumor.prognosticSummary_review, uuid: tumor.prognosticSummary_uuid }], tumor.prognosticSummary_uuid);
-                        mainUtils.validateTime(tumor, 'prognosticSummary');
+                        mainUtils.validateTime(tumor, ['prognosticSummary']);
                         break;
                     case 'PROGNOSTIC_IMPLICATION':
                         acceptItem([{ reviewObj: tumor.prognostic.description_review, uuid: tumor.prognostic.description_uuid },
                         { reviewObj: tumor.prognostic.level_review, uuid: tumor.prognostic.level_uuid }], tumor.prognostic_uuid);
+                        var keysToUpdateTimestamp = [];
                         if (ReviewResource.precise.includes(tumor.prognostic.description_uuid)) {
-                            mainUtils.validateTime(tumor.prognostic, 'description');
+                            keysToUpdateTimestamp.push('description');
                         }
                         if (ReviewResource.precise.includes(tumor.prognostic.level_uuid)) {
-                            mainUtils.validateTime(tumor.prognostic, 'level');
+                            keysToUpdateTimestamp.push('level');
+                        }
+                        if (keysToUpdateTimestamp.length > 0) {
+                            mainUtils.validateTime(tumor.prognostic, keysToUpdateTimestamp);
                         }
                         break;
                     case 'DIAGNOSTIC_IMPLICATION':
                         acceptItem([{ reviewObj: tumor.diagnostic.description_review, uuid: tumor.diagnostic.description_uuid },
                         { reviewObj: tumor.diagnostic.level_review, uuid: tumor.diagnostic.level_uuid }], tumor.diagnostic_uuid);
+                        var keysToUpdateTimestamp = [];
                         if (ReviewResource.precise.includes(tumor.diagnostic.description_uuid)) {
-                            mainUtils.validateTime(tumor.diagnostic, 'description');
+                            keysToUpdateTimestamp.push('description');
                         }
                         if (ReviewResource.precise.includes(tumor.diagnostic.level_uuid)) {
-                            mainUtils.validateTime(tumor.diagnostic, 'level');
+                            keysToUpdateTimestamp.push('level');
+                        }
+                        if (keysToUpdateTimestamp.length > 0) {
+                            mainUtils.validateTime(tumor.diagnostic, keysToUpdateTimestamp);
                         }
                         break;
                     case 'Standard implications for sensitivity to therapy':
@@ -1472,17 +1484,21 @@ angular.module('oncokbApp')
                             { reviewObj: treatment.propagation_review, uuid: treatment.propagation_uuid },
                             { reviewObj: treatment.indication_review, uuid: treatment.indication_uuid },
                             { reviewObj: treatment.description_review, uuid: treatment.description_uuid }], treatment.name_uuid);
+                        var keysToUpdateTimestamp = [];
                         if (ReviewResource.precise.includes(treatment.level_uuid)) {
-                            mainUtils.validateTime(treatment, 'level');
+                            keysToUpdateTimestamp.push('level');
                         }
                         if (ReviewResource.precise.includes(treatment.propagation_uuid)) {
-                            mainUtils.validateTime(treatment, 'propagation');
+                            keysToUpdateTimestamp.push('propagation');
                         }
                         if (ReviewResource.precise.includes(treatment.indication_uuid)) {
-                            mainUtils.validateTime(treatment, 'indication');
+                            keysToUpdateTimestamp.push('indication');
                         }
                         if (ReviewResource.precise.includes(treatment.description_uuid)) {
-                            mainUtils.validateTime(treatment, 'description');
+                            keysToUpdateTimestamp.push('description');
+                        }
+                        if (keysToUpdateTimestamp.length > 0) {
+                            mainUtils.validateTime(treatment, keysToUpdateTimestamp);
                         }
                         break;
                     case 'MUTATION_NAME_CHANGE':

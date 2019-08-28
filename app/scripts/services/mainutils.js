@@ -722,13 +722,16 @@ angular.module('oncokbApp')
                 return '';
             }
         }
-        function validateTime(obj, key) {
-            if (_.isUndefined(obj[key + '_validateTime'])) {
-                obj[key + '_validateTime'] = new FirebaseModel.Timestamp($rootScope.me.name);
-            } else {
-                obj[key + '_validateTime'].updatedBy = $rootScope.me.name;
-                obj[key + '_validateTime'].updateTime = new Date().getTime();
-            }
+        function validateTime(obj, keys) {
+            var timestamp = new Date().getTime();
+            _.forEach(keys, function(key) {
+                if (_.isUndefined(obj[key + '_validateTime'])) {
+                    obj[key + '_validateTime'] = new FirebaseModel.Timestamp($rootScope.me.name);
+                } else {
+                    obj[key + '_validateTime'].updatedBy = $rootScope.me.name;
+                    obj[key + '_validateTime'].updateTime = timestamp;
+                }
+            });
         }
         return {
             setIsoFormAndGeneType: setIsoFormAndGeneType,

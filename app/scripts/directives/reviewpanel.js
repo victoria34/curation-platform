@@ -223,8 +223,7 @@ angular.module('oncokbApp')
                         ReviewResource.loading.push($scope.uuid);
                         DatabaseConnector.updateGeneType($scope.obj.name, params, historyData, function(result) {
                             $scope.modelUpdate($scope.adjustedEvidenceType);
-                            mainUtils.validateTime($scope.obj.type, 'tsg');
-                            mainUtils.validateTime($scope.obj.type, 'ocg');
+                            mainUtils.validateTime($scope.obj.type, ['tsg', 'ocg']);
                             ReviewResource.loading = _.without(ReviewResource.loading, $scope.uuid);
                             numOfReviewItems.minus($scope.updatedBy);
                         }, function(error) {
