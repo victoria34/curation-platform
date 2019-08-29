@@ -166,15 +166,10 @@ angular.module('oncokbApp')
                     if (n) {
                         if ($(element).data('qtip')) {
                             var title = '';
-                            if (attrs.type === 'vusItem') {
-                                title = 'Last edit';
-                            } else if (attrs.type === 'timestamp') {
-                                title = 'Last review';
-                            }
+                            if (attrs.type === 'vusItem') title = 'Last edit';
+                            else if (attrs.type === 'timestamp') title = 'Last review';
                             var html = '<span>' + title + ': ' + new Date(scope.time).toLocaleDateString() + '</span><br/>';
-                            if (scope.by) {
-                                html += '<span>By: ' + scope.by + '</span>';
-                            }
+                            if (scope.by) html += '<span>By: ' + scope.by + '</span>';
                             $(element).qtip('api').set('content.text', html);
                         }
                     }

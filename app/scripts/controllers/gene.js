@@ -1422,57 +1422,34 @@ angular.module('oncokbApp')
                         { reviewObj: mutation.mutation_effect.effect_review, uuid: mutation.mutation_effect.effect_uuid },
                         { reviewObj: mutation.mutation_effect.description_review, uuid: mutation.mutation_effect.description_uuid }], mutation.mutation_effect_uuid);
                         var keysToUpdateTimestamp = [];
-                        if (ReviewResource.precise.includes(mutation.mutation_effect.oncogenic_uuid)) {
-                            keysToUpdateTimestamp.push('oncogenic');
-                        }
-                        if (ReviewResource.precise.includes(mutation.mutation_effect.effect_uuid)) {
-                            keysToUpdateTimestamp.push('effect');
-                        }
-                        if (ReviewResource.precise.includes(mutation.mutation_effect.description_uuid)) {
-                            keysToUpdateTimestamp.push('description');
-                        }
-                        if (keysToUpdateTimestamp.length > 0) {
-                            mainUtils.validateTime(mutation.mutation_effect, keysToUpdateTimestamp);
-                        }
+                        if (ReviewResource.precise.includes(mutation.mutation_effect.oncogenic_uuid)) keysToUpdateTimestamp.push('oncogenic');
+                        if (ReviewResource.precise.includes(mutation.mutation_effect.effect_uuid) || ReviewResource.precise.includes(mutation.mutation_effect.description_uuid)) keysToUpdateTimestamp.push('effect');
+                        if (keysToUpdateTimestamp.length > 0) mainUtils.validateTime($scope.gene.mutations[data.mutationIndex].mutation_effect, keysToUpdateTimestamp);
                         break;
                     case 'TUMOR_TYPE_SUMMARY':
                         acceptItem([{ reviewObj: tumor.summary_review, uuid: tumor.summary_uuid }], tumor.summary_uuid);
-                        mainUtils.validateTime(tumor, ['summary']);
+                        mainUtils.validateTime($scope.gene.mutations[data.mutationIndex].tumors[data.tumorIndex], ['summary']);
                         break;
                     case 'DIAGNOSTIC_SUMMARY':
                         acceptItem([{ reviewObj: tumor.diagnosticSummary_review, uuid: tumor.diagnosticSummary_uuid }], tumor.diagnosticSummary_uuid);
-                        mainUtils.validateTime(tumor, ['diagnosticSummary']);
+                        mainUtils.validateTime($scope.gene.mutations[data.mutationIndex].tumors[data.tumorIndex], ['diagnosticSummary']);
                         break;
                     case 'PROGNOSTIC_SUMMARY':
                         acceptItem([{ reviewObj: tumor.prognosticSummary_review, uuid: tumor.prognosticSummary_uuid }], tumor.prognosticSummary_uuid);
-                        mainUtils.validateTime(tumor, ['prognosticSummary']);
+                        mainUtils.validateTime($scope.gene.mutations[data.mutationIndex].tumors[data.tumorIndex], ['prognosticSummary']);
                         break;
                     case 'PROGNOSTIC_IMPLICATION':
                         acceptItem([{ reviewObj: tumor.prognostic.description_review, uuid: tumor.prognostic.description_uuid },
                         { reviewObj: tumor.prognostic.level_review, uuid: tumor.prognostic.level_uuid }], tumor.prognostic_uuid);
-                        var keysToUpdateTimestamp = [];
-                        if (ReviewResource.precise.includes(tumor.prognostic.description_uuid)) {
-                            keysToUpdateTimestamp.push('description');
-                        }
-                        if (ReviewResource.precise.includes(tumor.prognostic.level_uuid)) {
-                            keysToUpdateTimestamp.push('level');
-                        }
-                        if (keysToUpdateTimestamp.length > 0) {
-                            mainUtils.validateTime(tumor.prognostic, keysToUpdateTimestamp);
+                        if (ReviewResource.precise.includes(tumor.prognostic.description_uuid) || ReviewResource.precise.includes(tumor.prognostic.level_uuid)) {
+                            mainUtils.validateTime($scope.gene.mutations[data.mutationIndex].tumors[data.tumorIndex].prognostic, ['prognostic']);
                         }
                         break;
                     case 'DIAGNOSTIC_IMPLICATION':
                         acceptItem([{ reviewObj: tumor.diagnostic.description_review, uuid: tumor.diagnostic.description_uuid },
                         { reviewObj: tumor.diagnostic.level_review, uuid: tumor.diagnostic.level_uuid }], tumor.diagnostic_uuid);
-                        var keysToUpdateTimestamp = [];
-                        if (ReviewResource.precise.includes(tumor.diagnostic.description_uuid)) {
-                            keysToUpdateTimestamp.push('description');
-                        }
-                        if (ReviewResource.precise.includes(tumor.diagnostic.level_uuid)) {
-                            keysToUpdateTimestamp.push('level');
-                        }
-                        if (keysToUpdateTimestamp.length > 0) {
-                            mainUtils.validateTime(tumor.diagnostic, keysToUpdateTimestamp);
+                        if (ReviewResource.precise.includes(tumor.diagnostic.description_uuid) || ReviewResource.precise.includes(tumor.diagnostic.level_uuid)) {
+                            mainUtils.validateTime($scope.gene.mutations[data.mutationIndex].tumors[data.tumorIndex].diagnostic, ['diagnostic']);
                         }
                         break;
                     case 'Standard implications for sensitivity to therapy':
@@ -1484,21 +1461,9 @@ angular.module('oncokbApp')
                             { reviewObj: treatment.propagation_review, uuid: treatment.propagation_uuid },
                             { reviewObj: treatment.indication_review, uuid: treatment.indication_uuid },
                             { reviewObj: treatment.description_review, uuid: treatment.description_uuid }], treatment.name_uuid);
-                        var keysToUpdateTimestamp = [];
-                        if (ReviewResource.precise.includes(treatment.level_uuid)) {
-                            keysToUpdateTimestamp.push('level');
-                        }
-                        if (ReviewResource.precise.includes(treatment.propagation_uuid)) {
-                            keysToUpdateTimestamp.push('propagation');
-                        }
-                        if (ReviewResource.precise.includes(treatment.indication_uuid)) {
-                            keysToUpdateTimestamp.push('indication');
-                        }
-                        if (ReviewResource.precise.includes(treatment.description_uuid)) {
-                            keysToUpdateTimestamp.push('description');
-                        }
-                        if (keysToUpdateTimestamp.length > 0) {
-                            mainUtils.validateTime(treatment, keysToUpdateTimestamp);
+                        if (ReviewResource.precise.includes(treatment.level_uuid) || ReviewResource.precise.includes(treatment.propagation_uuid) ||
+                            ReviewResource.precise.includes(treatment.indication_uuid) || ReviewResource.precise.includes(treatment.description_uuid)) {
+                            mainUtils.validateTime($scope.gene.mutations[data.mutationIndex].tumors[data.tumorIndex].TIs[data.tiIndex].treatments[data.treatmentIndex], ['name']);
                         }
                         break;
                     case 'MUTATION_NAME_CHANGE':

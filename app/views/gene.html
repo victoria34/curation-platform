@@ -185,11 +185,6 @@
               <br/>
               <span ng-show="displayPrecisely(mutation.mutation_effect.description_uuid)">
                 <strong>Description of Evidence:</strong>
-                  <refresh-date ng-if="mutation.mutation_effect.description_validateTime" ng-show="!reviewMode" key="'description'"
-                                update-time="mutation.mutation_effect.description_validateTime.updateTime" location="getLocation('Mutation Effect', mutation.name)"
-                                updated-by="mutation.mutation_effect.description_validateTime.updatedBy" path="effectPath"
-                                hugo-symbol="gene.name" obj="mutation.mutation_effect" disabled="disableRefreshDate(mutation.mutation_effect.description_uuid)"></refresh-date>
-                <br/>
                 <realtime-string t="'p'" key="'description'" path="effectPath" uuid="getUUID({type: 'mutation_effect', key: 'description', path: path})"></realtime-string>
               </span>
               <span ng-show="!reviewMode">

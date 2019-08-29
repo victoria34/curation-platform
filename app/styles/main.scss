@@ -10,6 +10,11 @@ $chosen-sprite-retina-path: "../components/bootstrap-chosen/chosen-sprite@2x.png
 @import "../components/bootstrap-chosen/bootstrap-chosen.scss";
 @import "../components/fontawesome/scss/font-awesome.scss";
 
+$primary-color: rgb(50, 118, 177);
+$success-color: rgb(92, 184, 92);
+$info-color: rgb(57, 179, 215);
+$warning-color: rgb(240, 173, 78);
+$danger-color: rgb(217, 83, 79);
 body {
   margin-bottom: 20px;
 }
@@ -642,31 +647,31 @@ h5 {
 
 .input-group-addon.primary {
   color: rgb(255, 255, 255);
-  background-color: rgb(50, 118, 177);
+  background-color: $primary-color;
   border-color: rgb(40, 94, 142);
 }
 
 .input-group-addon.success {
   color: rgb(255, 255, 255);
-  background-color: rgb(92, 184, 92);
+  background-color: $success-color;
   border-color: rgb(76, 174, 76);
 }
 
 .input-group-addon.info {
   color: rgb(255, 255, 255);
-  background-color: rgb(57, 179, 215);
+  background-color: $info-color;
   border-color: rgb(38, 154, 188);
 }
 
 .input-group-addon.warning {
   color: rgb(255, 255, 255);
-  background-color: rgb(240, 173, 78);
+  background-color: $warning-color;
   border-color: rgb(238, 162, 54);
 }
 
 .input-group-addon.danger {
   color: rgb(255, 255, 255);
-  background-color: rgb(217, 83, 79);
+  background-color: $danger-color;
   border-color: rgb(212, 63, 58);
 }
 
@@ -972,11 +977,11 @@ input[type=radio]:checked + label:before, input[type=checkbox]:checked + label:b
   font-size: 15px;
 
   i.danger {
-    color: rgb(217, 83, 79);
+    color: $danger-color;
   }
 
   i.warning {
-    color: rgb(240, 173, 78);
+    color: $warning-color;
   }
 }
 
